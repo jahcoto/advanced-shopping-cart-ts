@@ -1,5 +1,6 @@
-import { Button, Card } from "react-bootstrap";
-import { formatCurrency } from "../utilities/formatCurrency";
+import { Button, Card } from 'react-bootstrap';
+import { useShoppingCart } from '../context/ShoppingCartContext';
+import { formatCurrency } from '../utilities/formatCurrency';
 
 type StoreItemProps = {
   id: number;
@@ -22,7 +23,7 @@ const StoreItem = ({ id, name, price, imgUrl }: StoreItemProps) => {
         variant="top"
         src={imgUrl}
         height="200px"
-        style={{ objectFit: "cover" }}
+        style={{ objectFit: 'cover' }}
       />
       <Card.Body className="d-flex flex-column">
         <Card.Title className="d-flex justify-content-between align-items-baseline mb-4">
@@ -31,15 +32,17 @@ const StoreItem = ({ id, name, price, imgUrl }: StoreItemProps) => {
         </Card.Title>
         <div className="mt-auto">
           {quantity === 0 ? (
-            <Button className="w-100">+ Add to Cart</Button>
+            <Button className="w-100" onClick={() => increaseCartQuantity(id)}>
+              + Add to Cart
+            </Button>
           ) : (
             <div
               className="d-flex align-items-center flex-column"
-              style={{ gap: ".5rem" }}
+              style={{ gap: '.5rem' }}
             >
               <div
                 className="d-flex align-items-center justify-content-center"
-                style={{ gap: ".5rem" }}
+                style={{ gap: '.5rem' }}
               >
                 <Button onClick={() => decreaseCartQuantity(id)}>-</Button>
                 <div>
